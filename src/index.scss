@@ -1,5 +1,5 @@
 @import './consts.scss';
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap');
 
 * {
   box-sizing: border-box;
@@ -76,4 +76,10 @@ button {
 ::-webkit-scrollbar-thumb {
   border-radius: 50px;
   background-color: $font-light;
+}
+
+.card {
+  background-color: white;
+  border-radius: $border-radius;
+  box-shadow: $shadow;
 }

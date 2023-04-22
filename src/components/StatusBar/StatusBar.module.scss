@@ -1,0 +1,21 @@
+@import '../../consts.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 130px;
+  width: 130px;
+  background-color: $purple;
+  border-radius: $border-radius;
+  padding: 30px;
+}
+
+.logout {
+  background-color: transparent;
+}
+
+.logout-icon {
+  width: 100%;
+  color: white;
+}
