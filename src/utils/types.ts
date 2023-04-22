@@ -1,12 +1,16 @@
 export interface IMessage {
-  id: string;
   authorUid: string;
   content: string;
-  date: number;
+  timeStamp: number;
 }
 
 export interface IUser {
   uid: string;
   username: string;
   profilePictureUrl?: string;
+}
+
+export interface IConversation {
+  id: string;
+  messages: IMessage[];
 }

@@ -1,5 +1,5 @@
-import { child, get, getDatabase, ref } from 'firebase/database';
-import { IUser } from './types';
+import { child, get, getDatabase, ref, set } from 'firebase/database';
+import { IConversation, IMessage, IUser } from './types';
 
 export const placeholderAvatarUrl = 'https://t3.ftcdn.net/jpg/04/17/45/28/360_F_417452853_zX2uSxhLns2Ei2nRmXjnpjPw5Ox5V7EK.jpg';
 
@@ -13,4 +13,35 @@ export const getAllUsers = async (): Promise<IUser[]> => {
   });
 
   return users;
+};
+
+export const getConversation = async (uidA: string, uidB: string): Promise<IConversation | null> => {
+  const dbRef = ref(getDatabase());
+  let snapshot = await get(child(dbRef, `conversations/${uidA}_${uidB}`));
+
+  if (!snapshot.exists()) {
+    snapshot = await get(child(dbRef, `conversations/${uidB}_${uidA}`));
+  }
+
+  if (!snapshot.exists()) return null;
+  return snapshot.val();
+};
+
+export const sendMessage = async (uidA: string, uidB: string, newMessage: IMessage) => {
+  const db = getDatabase();
+  const dbRef = ref(db);
+  const uids = [uidA, uidB];
+  uids.sort();
+
+  const snapshot = await get(child(dbRef, `conversations/${uids[0]}_${uids[1]}`));
+  let relevantConversation: IConversation = snapshot.val();
+
+  if (!relevantConversation) {
+    relevantConversation = { id: `${uids[0]}_${uids[1]}`, messages: [] };
+  }
+
+  set(ref(db, `conversations/${uids[0]}_${uids[1]}`), {
+    ...relevantConversation,
+    messages: [...relevantConversation!.messages, newMessage],
+  });
 };

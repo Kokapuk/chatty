@@ -48,13 +48,13 @@ svg {
   }
 }
 
+*:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 button {
   cursor: pointer;
-
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-  }
 }
 
 .button {
