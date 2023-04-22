@@ -27,15 +27,23 @@
   display: flex;
   align-items: center;
   gap: 30px;
-  height: 60px;
+  height: 80px;
   background-color: transparent;
   width: 100%;
-  padding-bottom: 20px;
+  padding: 20px;
   border-bottom: 1px solid $separator-color;
+  transition: $transition;
 
   &__title {
     font-weight: 600;
     font-size: 2rem;
+  }
+
+  &__active {
+    background-color: $purple;
+    color: white;
+    border-radius: $border-radius;
+    border-color: transparent;
   }
 }
 
