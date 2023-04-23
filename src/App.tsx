@@ -8,6 +8,7 @@ import LoadingIndicator from './components/LoadingIndicator/LoadingIndicator';
 
 const Home = lazy(() => import('./routes/Home/Home'));
 const AuthForm = lazy(() => import('./routes/AuthForm/AuthForm'));
+const Settings = lazy(() => import('./routes/Settings/Settings'));
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <AuthForm authType={EAuthType.Login} />,
+  },
+  {
+    path: '/settings',
+    element: <Settings />,
   },
 ]);
 

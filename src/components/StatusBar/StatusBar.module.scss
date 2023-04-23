@@ -3,19 +3,23 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   width: 130px;
   width: 130px;
   background-color: $purple;
   border-radius: $border-radius;
   padding: 30px;
+  gap: 40px;
 }
 
-.logout {
+.icon-button {
   background-color: transparent;
 }
 
-.logout-icon {
+.icon {
   width: 100%;
   color: white;
+}
+
+.logout-button {
+  margin-top: auto;
 }

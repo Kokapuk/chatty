@@ -1,4 +1,4 @@
-const Search = (props: React.SVGAttributes<SVGElement>) => {
+const Logout = (props: React.SVGAttributes<SVGElement>) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -16,4 +16,4 @@ const Search = (props: React.SVGAttributes<SVGElement>) => {
   );
 };
 
-export default Search;
+export default Logout;

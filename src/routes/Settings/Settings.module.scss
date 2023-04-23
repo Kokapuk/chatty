@@ -1,0 +1,35 @@
+@import '../../consts.scss';
+
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 25px 35px;
+  width: 350px;
+  gap: 25px;
+}
+
+.input {
+  font-size: 20px;
+  padding: 15px 25px;
+}
+
+.button {
+  background-color: $purple;
+  padding: 15px 25px;
+  color: white;
+  font-size: 20px;
+  border-radius: $border-radius;
+
+  &__low-attention {
+    background-color: white;
+    border: 3px solid $purple;
+    color: $font;
+  }
+}

@@ -9,7 +9,7 @@ import { Unsubscribe, getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { getAllUsers, placeholderAvatarUrl, sendMessage } from '../../utils/database';
 import auth from '../../stores/auth';
-import { child, get, getDatabase, onValue, ref } from 'firebase/database';
+import { getDatabase, onValue, ref } from 'firebase/database';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -77,10 +77,7 @@ const Home = () => {
               onClick={() => setSelectedUser(user)}
               key={user.uid}
               className={classNames(styles.chat, 'button', selectedUser?.uid === user.uid && styles.chat__active)}>
-              <img
-                src={user.profilePictureUrl ? user.profilePictureUrl : placeholderAvatarUrl}
-                className='avatar avatar__horizontal'
-              />
+              <img src={user.avatarUrl ? user.avatarUrl : placeholderAvatarUrl} className='avatar avatar__horizontal' />
               <span className={styles.chat__title}>{user.username}</span>
             </button>
           ))}
@@ -91,7 +88,7 @@ const Home = () => {
         {selectedUser && (
           <div className={styles['user-info']}>
             <img
-              src={selectedUser?.profilePictureUrl ? selectedUser.profilePictureUrl : placeholderAvatarUrl}
+              src={selectedUser?.avatarUrl ? selectedUser.avatarUrl : placeholderAvatarUrl}
               className='avatar avatar__horizontal'
             />
             <span className={styles['user-info__user-name']}>{selectedUser.username}</span>

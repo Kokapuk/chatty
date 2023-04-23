@@ -7,7 +7,7 @@ export interface IMessage {
 export interface IUser {
   uid: string;
   username: string;
-  profilePictureUrl?: string;
+  avatarUrl?: string;
 }
 
 export interface IConversation {
