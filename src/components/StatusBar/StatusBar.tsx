@@ -5,17 +5,26 @@ import { getAuth, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import auth from '../../stores/auth';
-import { placeholderAvatarUrl } from '../../utils/database';
 import Gear from '../../assets/icons/Gear';
+import { useEffect, useState } from 'react';
+import { getPlaceholderAvatarUrl } from '../../utils/storage';
 
 const StatusBar = observer(() => {
   const navigate = useNavigate();
+  const [placeholderAvatarUrl, setPlaceholderAvatarUrl] = useState('');
 
   const logOut = async () => {
     await signOut(getAuth());
     navigate('/login');
   };
 
+  useEffect(() => {
+    const fetchPlaceholderAvatarUrl = async () => {
+      setPlaceholderAvatarUrl(await getPlaceholderAvatarUrl());
+    };
+
+    fetchPlaceholderAvatarUrl();
+  }, []);
   return (
     <div className={styles.container}>
       <img className='avatar avatar__vertical' src={auth.userInfo?.avatarUrl ? auth.userInfo.avatarUrl : placeholderAvatarUrl} />

@@ -7,10 +7,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import { IConversation, IUser } from '../../utils/types';
 import { Unsubscribe, getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { getAllUsers, placeholderAvatarUrl, sendMessage } from '../../utils/database';
+import { getAllUsers, sendMessage } from '../../utils/database';
 import auth from '../../stores/auth';
 import { getDatabase, onValue, ref } from 'firebase/database';
 import moment from 'moment';
+import { getPlaceholderAvatarUrl } from '../../utils/storage';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const Home = () => {
   const [selectedUser, setSelectedUser] = useState<IUser | null>(null);
   const [draftMessage, setDraftMessage] = useState('');
   const [conversation, setConversation] = useState<IConversation | null>(null);
+  const [placeholderAvatarUrl, setPlaceholderAvatarUrl] = useState('');
 
   const messageWraper = useRef<HTMLDivElement>(null);
   let valueUnsubscribe: Unsubscribe | null = null;
@@ -41,6 +43,12 @@ const Home = () => {
     };
 
     fetchUsers();
+
+    const fetchPlaceholderAvatarUrl = async () => {
+      setPlaceholderAvatarUrl(await getPlaceholderAvatarUrl());
+    };
+
+    fetchPlaceholderAvatarUrl();
   }, []);
 
   useEffect(() => {

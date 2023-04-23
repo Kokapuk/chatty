@@ -3,16 +3,17 @@ import styles from './Settings.module.scss';
 import { IUser } from '../../utils/types';
 import { useNavigate } from 'react-router-dom';
 import { getDatabase, onValue, ref as databaseRef, set } from 'firebase/database';
-import { placeholderAvatarUrl } from '../../utils/database';
 import classNames from 'classnames';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getDownloadURL, getStorage, ref as storageRef, uploadBytes } from 'firebase/storage';
+import { getPlaceholderAvatarUrl } from '../../utils/storage';
 
 const Settings = () => {
   const navigate = useNavigate();
   const avatarInput = useRef<HTMLInputElement>(null);
   const [userInfo, setUserInfo] = useState<IUser | null>(null);
   const [uploadedAvatar, setUploadedAvatar] = useState<File | null>(null);
+  const [placeholderAvatarUrl, setPlaceholderAvatarUrl] = useState('');
 
   useEffect(() => {
     onAuthStateChanged(getAuth(), (user) => {
@@ -27,6 +28,12 @@ const Settings = () => {
         setUserInfo(snapshot.val());
       });
     });
+
+    const fetchPlaceholderAvatarUrl = async () => {
+      setPlaceholderAvatarUrl(await getPlaceholderAvatarUrl());
+    };
+
+    fetchPlaceholderAvatarUrl();
   }, []);
 
   const uploadAvatar = () => {
