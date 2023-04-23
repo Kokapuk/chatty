@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { getAllUsers, placeholderAvatarUrl, sendMessage } from '../../utils/database';
 import auth from '../../stores/auth';
 import { getDatabase, onValue, ref } from 'firebase/database';
+import moment from 'moment';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -97,11 +98,20 @@ const Home = () => {
 
         <div ref={messageWraper} className={styles['messages-wrapper']}>
           {conversation?.messages.map((message) => (
-            <div
-              key={message.timeStamp}
-              className={classNames(styles.message, message.authorUid === auth.user?.uid && styles['message__own'])}>
-              {message.content}
-            </div>
+            <>
+              <div
+                key={message.timeStamp}
+                className={classNames(styles.message, message.authorUid === auth.user?.uid && styles['message__own'])}>
+                {message.content}
+              </div>
+              <span
+                className={classNames(
+                  styles['message__time-stamp'],
+                  message.authorUid === auth.user?.uid && styles['message__time-stamp__own']
+                )}>
+                {moment(message.timeStamp).calendar()}
+              </span>
+            </>
           ))}
         </div>
 

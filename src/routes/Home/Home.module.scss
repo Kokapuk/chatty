@@ -93,6 +93,16 @@
     color: white;
     margin-left: auto;
   }
+
+  &__time-stamp {
+    color: #707070;
+    font-size: 20px;
+    font-weight: 300;
+
+    &__own {
+      margin-left: auto;
+    }
+  }
 }
 
 .text-area {
