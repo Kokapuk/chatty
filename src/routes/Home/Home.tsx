@@ -15,6 +15,7 @@ import { getPlaceholderAvatarUrl } from '../../utils/storage';
 
 const Home = () => {
   const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState('');
   const [users, setUsers] = useState<IUser[]>([]);
   const [selectedUser, setSelectedUser] = useState<IUser | null>(null);
   const [draftMessage, setDraftMessage] = useState('');
@@ -78,13 +79,14 @@ const Home = () => {
       <StatusBar />
 
       <div className={styles['middle']}>
-        <Search />
+        <Search value={searchQuery} onInput={(e) => setSearchQuery(e.currentTarget.value)} />
 
         <div className={classNames(styles['chat-list'], 'card')}>
           {users.map((user) => (
             <button
               onClick={() => setSelectedUser(user)}
               key={user.uid}
+              style={{ display: user.username.toLowerCase().includes(searchQuery.toLowerCase()) ? 'flex' : 'none' }}
               className={classNames(styles.chat, 'button', selectedUser?.uid === user.uid && styles.chat__active)}>
               <img src={user.avatarUrl ? user.avatarUrl : placeholderAvatarUrl} className='avatar avatar__horizontal' />
               <span className={styles.chat__title}>{user.username}</span>
